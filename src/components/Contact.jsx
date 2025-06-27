@@ -45,21 +45,29 @@ const Contact = () => {
     setConfirmation("");
 
     if (!form.name.trim()) {
-      setNameError("Name is required.");
+      setNameError("Le nom est requis.");
       return;
     }
 
     setLoading(true);
 
-    // WhatsApp link with pre-filled message
+    // Message WhatsApp joliment formaté
     const phoneNumber = "212717628421";
-    const messageText = `Name: ${form.name}%0A${form.message}`;
+    // Utilise \n pour les retours à la ligne, puis encodeURIComponent convertira en %0A
+    const messageText =
+      ` Nouveau message de contact \n` +
+      `--------------------\n` +
+      `Nom : ${form.name}\n` +
+      `Message :\n${form.message}\n` +
+      `--------------------\n` ;
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messageText)}`;
 
     window.open(whatsappUrl, "_blank");
 
     setLoading(false);
-    setConfirmation("Your message has been opened in WhatsApp. I will get back to you as soon as possible.");
+    setConfirmation(
+      "Votre message a été ouvert dans WhatsApp. Je vous répondrai dès que possible."
+    );
 
     setForm({
       name: "",
@@ -68,28 +76,37 @@ const Contact = () => {
   };
 
   return (
-    <div className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}>
-      <motion.div variants={slideIn("left", "tween", 0.2, 1)} className="flex-[0.75] bg-black-100 p-8 rounded-2xl">
-        <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadText}>Contact Me</h3>
+    <div
+      className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
+    >
+      <motion.div
+        variants={slideIn("left", "tween", 0.2, 1)}
+        className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
+      >
+        <p className={styles.sectionSubText}>Entrer en contact</p>
+        <h3 className={styles.sectionHeadText}>Contactez-moi</h3>
 
-        <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="mt-12 flex flex-col gap-8"
+        >
           <InputField
-            label="Your Name"
+            label="Votre nom"
             name="name"
             value={form.name}
             onChange={handleChange}
-            placeholder="Insert Your name here..."
+            placeholder="Insérez votre nom ici..."
             type="text"
           />
           {nameError && <span className="text-red-500">{nameError}</span>}
 
           <InputField
-            label="Your Message"
+            label="Votre message"
             name="message"
             value={form.message}
             onChange={handleChange}
-            placeholder="What you want to say...?"
+            placeholder="Que voulez-vous dire...?"
             type="text"
           />
 
@@ -97,13 +114,16 @@ const Contact = () => {
             type="submit"
             className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"
           >
-            {loading ? "Opening WhatsApp..." : "Send to WhatsApp"}
+            {loading ? "Ouverture de WhatsApp..." : "Envoyer sur WhatsApp"}
           </button>
           {confirmation && <p className="text-green-500">{confirmation}</p>}
         </form>
       </motion.div>
 
-      <motion.div variants={slideIn("right", "tween", 0.2, 1)} className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]">
+      <motion.div
+        variants={slideIn("right", "tween", 0.2, 1)}
+        className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
+      >
         <EarthCanvas />
       </motion.div>
     </div>

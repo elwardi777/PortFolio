@@ -42,10 +42,11 @@ const Hero = () => {
         className={`absolute inset-0 top-[100px] max-w-7xl mx-auto ${styles.paddingX} flex flex-col md:flex-row items-center gap-8`}
       >
         {/* Indicateur latéral */}
-        <div className="flex flex-row md:flex-col justify-center items-center mt-2 md:mt-5">
-          <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
-          <div className="w-1 md:h-80 h-40 violet-gradient" />
-        </div>
+        <div className="flex flex-col md:flex-col items-center justify-start mt-2 md:mt-5">
+  <div className="w-4 h-4 rounded-full bg-[#915EFF]" />
+  <div className="w-1 h-32 md:h-80 violet-gradient mt-2" />
+</div>
+
 
         {/* Contenu texte */}
         <div className="flex-1 w-full">
@@ -53,7 +54,7 @@ const Hero = () => {
             Salut, je suis <span className="text-[#915EFF]">Abderrahmane</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            Je fais{" "}
+          développeur spécialisé en&nbsp;{" "}
             <Typewriter
               options={{
                 strings: [
@@ -72,6 +73,7 @@ const Hero = () => {
             />
           </p>
         </div>
+
 
         {/* Image 3D, compatible responsive et touch/souris */}
         <motion.div

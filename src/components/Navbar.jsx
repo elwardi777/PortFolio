@@ -1,27 +1,27 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { close, logo, menu } from '../assets';
+import { close, menu } from '../assets';
 import { navLinks } from '../constants';
 import { styles } from '../styles';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import cn from 'classnames';
 
-// Define the name and color pattern
 const NAME = "Abderrahmane Ourdi";
-const COLORS = ["#915EFF", "white"]; // #915EFF (violet) and Tailwind green-500
+const COLORS = ["#915EFF", "white"];
+
+const NAVBAR_HEIGHT = 56; // la hauteur fixe de ta navbar (en px)
 
 const Navbar = () => {
   const [active, setActive] = useState('');
   const [toggle, setToggle] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  // States for animated name effect
+  // Animated name effect
   const [logoHovered, setLogoHovered] = useState(false);
   const [logoLetterStates, setLogoLetterStates] = useState(
     Array(NAME.length).fill(false)
   );
 
-  // 3D avatar
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
   const imgRef = useRef(null);
@@ -30,6 +30,7 @@ const Navbar = () => {
   const springRotateY = useSpring(rotateY, springConfig);
 
   const handlePointerMove = (e) => {
+    if (!imgRef.current) return;
     const bounds = imgRef.current.getBoundingClientRect();
     const clientX = e.type.includes("touch") ? e.touches[0].clientX : e.clientX;
     const clientY = e.type.includes("touch") ? e.touches[0].clientY : e.clientY;
@@ -55,7 +56,6 @@ const Navbar = () => {
     if (toggle) setActive('');
   }, [toggle]);
 
-  // Per-letter hover animation for "Abderrahmane Ourdi"
   useEffect(() => {
     let timeout;
     if (logoHovered) {
@@ -74,31 +74,6 @@ const Navbar = () => {
     return () => clearTimeout(timeout);
   }, [logoHovered]);
 
-  const renderNavLinks = (isSecondary) => (
-    <ul className={`list-none ${isSecondary ? 'flex sm:hidden' : 'hidden sm:flex'} flex-row gap-6`}>
-      {navLinks.map((link) => (
-        <li
-          key={link.id}
-          className={`${
-            active === link.title ? 'text-white' : isSecondary ? 'text-secondary' : 'text-white'
-          } hover:text-white text-[20px] font-medium cursor-pointer`}
-          onClick={() => {
-            setActive(link.title);
-            if (isSecondary) setToggle(false);
-          }}
-        >
-          <a href={`#${link.id}`}>{link.title}</a>
-        </li>
-      ))}
-      <li
-        className={`text-${isSecondary ? 'secondary' : 'white'} hover:text-white text-[20px] font-medium cursor-pointer`}
-      >
-        <button onClick={toggleResume}>CV</button>
-      </li>
-    </ul>
-  );
-
-  // Modal for full image
   const renderModal = () => (
     <div
       className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
@@ -129,8 +104,16 @@ const Navbar = () => {
   return (
     <>
       {showModal && renderModal()}
-      <nav className={`${styles.paddingX} w-full flex items-center py-3 fixed top-0 z-20 bg-primary`}>
-        <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
+
+      <nav
+        className={`${styles.paddingX} w-full flex items-center py-3 fixed top-0 z-20 bg-primary shadow-md`}
+        style={{
+          height: NAVBAR_HEIGHT,
+          WebkitBackdropFilter: 'blur(8px)',
+          backdropFilter: 'blur(8px)',
+        }}
+      >
+        <div className="w-full flex justify-between items-center max-w-7xl mx-auto" style={{ height: '100%' }}>
           <Link
             to="/"
             className="flex items-center gap-2"
@@ -146,10 +129,10 @@ const Navbar = () => {
               ref={imgRef}
               style={{
                 perspective: 800,
-                width: 76,
-                height: 76,
-                minWidth: 76,
-                minHeight: 76,
+                width: 56,
+                height: 56,
+                minWidth: 56,
+                minHeight: 56,
                 marginRight: 8,
                 borderRadius: '50%',
                 boxShadow: '0 6px 24px rgba(145,94,255,0.3)',
@@ -161,6 +144,7 @@ const Navbar = () => {
                 background: 'linear-gradient(135deg, #915EFF55 0%, #fff2 100%)',
                 border: '3px solid #915EFF',
                 cursor: 'pointer',
+                marginTop: 10,
               }}
               className="overflow-hidden flex items-center justify-center"
               onMouseMove={handlePointerMove}
@@ -184,8 +168,9 @@ const Navbar = () => {
                 draggable={false}
               />
             </motion.div>
+
             {/* Animated Name */}
-            <span className="text-xl font-bold overflow-hidden select-none">
+            <span className="text-lg md:text-xl font-bold overflow-hidden select-none whitespace-nowrap">
               {NAME.split('').map((letter, index) => (
                 <span
                   key={index}
@@ -198,7 +183,7 @@ const Navbar = () => {
                   style={{
                     color: logoHovered || logoLetterStates[index]
                       ? COLORS[index % COLORS.length]
-                      : "#cbd5e1", // Tailwind slate-300
+                      : "#cbd5e1",
                     transform: logoHovered || logoLetterStates[index]
                       ? "translateY(-2px)"
                       : "none",
@@ -210,24 +195,85 @@ const Navbar = () => {
               ))}
             </span>
           </Link>
-          {renderNavLinks(false)}
+
+          {/* Desktop Navigation */}
+          <ul className="list-none hidden sm:flex flex-row gap-6">
+            {navLinks.map((link) => (
+              <li
+                key={link.id}
+                className={`${
+                  active === link.title ? 'text-white' : 'text-white'
+                } hover:text-white text-[20px] font-medium cursor-pointer`}
+                onClick={() => setActive(link.title)}
+              >
+                <a href={`#${link.id}`}>{link.title}</a>
+              </li>
+            ))}
+            <li className="text-white hover:text-white text-[20px] font-medium cursor-pointer">
+              <button onClick={toggleResume}>CV</button>
+            </li>
+          </ul>
+
+          {/* Mobile Hamburger */}
           <div className="sm:hidden flex flex-1 justify-end items-center">
             <img
               src={toggle ? close : menu}
               alt="menu"
-              className="w-[28px] h-[18px] object-contain cursor-pointer"
+              className="w-8 h-8 object-contain cursor-pointer"
               onClick={() => setToggle(!toggle)}
             />
-            <div
-              className={`p-4 black-gradient absolute top-14 right-0 mx-2 my-2 min-w-[120px] z-10 rounded-xl foggy-glass ${
-                toggle ? 'flex' : 'hidden'
-              }`}
-            >
-              {renderNavLinks(true)}
-            </div>
           </div>
         </div>
       </nav>
+
+      {/* Sidebar mobile collée JUSTE SOUS la navbar */}
+      <AnimatePresence>
+        {toggle && (
+          <motion.div
+          className="fixed left-0 right-0 bg-transparent backdrop-blur-md text-white shadow-md z-10 rounded-b-2xl max-w-md mx-auto overflow-hidden"
+          initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            style={{
+              top: NAVBAR_HEIGHT,
+              maxHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`
+            }}
+          >
+            <nav className="flex flex-col space-y-6 p-6">
+              {navLinks.map((link) => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className={`py-3 px-4 rounded-md text-lg transition-colors ${
+                    active === link.title
+                      ? 'text-[#915EFF] bg-[#fff1]'
+                      : 'text-white/80 hover:text-[#915EFF] hover:bg-white/10'
+                  }`}
+                  onClick={() => {
+                    setActive(link.title);
+                    setToggle(false);
+                  }}
+                >
+                  {link.title}
+                </a>
+              ))}
+              <button
+                onClick={() => {
+                  toggleResume();
+                  setToggle(false);
+                }}
+                className="py-3 px-4 rounded-md text-lg transition-colors text-white/80 hover:text-[#915EFF] hover:bg-white/10"
+              >
+                CV
+              </button>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Spacer pour éviter que le contenu saute */}
+      <div className="block sm:hidden" style={{ height: toggle ? 'auto' : 0 }} />
     </>
   );
 };
