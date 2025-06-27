@@ -47,14 +47,14 @@ mindmap
 
 ## 🚀 Demo
 
-Experience the live portfolio at [https://portfolio-lohit.vercel.app](https://portfolio-lohit.vercel.app)
+Experience the live portfolio at [https://portfolio-abderrahman-ourdi.vercel.app/](https://portfolio-abderrahman-ourdi.vercel.app/)
 
 ## 🛠️ Installation
 
 1️⃣ Clone the repository:
 
 ```bash
-git clone https://github.com/lohitkolluri/Portfolio-Website
+git clone  https://github.com/elwardi777/PortFolio
 ```
 
 2️⃣ Navigate to project directory:
