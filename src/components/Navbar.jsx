@@ -144,7 +144,7 @@ const Navbar = () => {
                 background: 'linear-gradient(135deg, #915EFF55 0%, #fff2 100%)',
                 border: '3px solid #915EFF',
                 cursor: 'pointer',
-                marginTop: 10,
+                
               }}
               className="overflow-hidden flex items-center justify-center"
               onMouseMove={handlePointerMove}
