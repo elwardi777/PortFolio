@@ -1,18 +1,19 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
-import { DRACOLoader } from "three/addons/loaders/DRACOLoader";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import CanvasLoader from "../Loader";
 
 const ComputerModel = ({ isMobile }) => {
-  const { scene } = useGLTF(
-    "./desktop_pc/scene.gltf",
-    undefined,
-    (loader) => {
-      const dracoLoader = new DRACOLoader();
-      loader.setDRACOLoader(dracoLoader);
-    }
-  );
+  // Patch: useGLTF accepts only two arguments, loader extension must be registered globally
+  useEffect(() => {
+    // Register DRACOLoader for all GLTFs globally
+    // This is required for compatibility with latest drei/three versions
+    useGLTF.preload("./desktop_pc/scene.gltf");
+    return () => {};
+  }, []);
+
+  const { scene } = useGLTF("./desktop_pc/scene.gltf");
 
   return (
     <mesh>
@@ -48,11 +49,20 @@ const ComputersCanvas = () => {
       setIsMobile(event.matches);
     };
 
+    setIsMobile(mediaQuery.matches);
     mediaQuery.addEventListener("change", handleMediaQueryChange);
 
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
+  }, []);
+
+  // Patch: Ensure DRACOLoader is registered for useGLTF
+  useEffect(() => {
+    // Only register DRACOLoader if not already registered
+    if (!useGLTF.DRACOLoader) {
+      useGLTF.DRACOLoader = DRACOLoader;
+    }
   }, []);
 
   return (
