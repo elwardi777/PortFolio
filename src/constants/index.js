@@ -47,7 +47,7 @@ export const services = [
 ];
 
 export const technologies = [
-  { name: "C", icon: typescript },
+  { name: "C", icon: c },
   { name: "Python", icon: python },
   { name: "Java", icon: java },
   { name: "C", icon: c },
