@@ -61,7 +61,11 @@ const Navbar = () => {
               window.scrollTo(0, 0);
             }}
           >
-            <img src="/images/_storage_emulated_0_Easy_Retouch__IMG_20241026065919_1-removebg-preview.png" alt="logo" className="w-9 h-9 object-contain" />
+<img
+  src="/IMG-20250619-WA0031.jpg"
+  alt="logo"
+  className="w-24 h-24 object-contain"
+/>
             <p className="text-white text-[20px] font-bold cursor-pointer flex">
               Abderrahmane&nbsp;
               <span className="sm:block hidden">Ourdi</span>
