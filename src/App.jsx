@@ -11,11 +11,11 @@ import {
   Works,
 } from "./components";
 import Footer from "./components/Footer";
-import { motion, AnimatePresence } from "framer-motion";
 
+// Responsive Loader
 const Loader = ({ show }) => (
   <div
-    className={`fixed inset-0 flex items-center justify-center bg-black z-50 transition-all duration-1000 ${
+    className={`fixed inset-0 flex items-center justify-center bg-black z-50 transition-all duration-700 ${
       show
         ? "opacity-100 pointer-events-auto"
         : "opacity-0 pointer-events-none translate-y-10"
@@ -33,7 +33,10 @@ const Loader = ({ show }) => (
           0 0 24px #915EFF,
           0 0 40px #915EFF;
         letter-spacing: 0.25em;
+        transition: opacity 0.7s, transform 0.7s;
         animation: glow 1.6s ease-in-out infinite alternate;
+        /* Responsive font size */
+        font-size: 2.5rem;
       }
       @media (max-width: 640px) {
         .loader-text {
@@ -65,67 +68,25 @@ const Loader = ({ show }) => (
   </div>
 );
 
-const MainContent = ({ show }) => (
-  <motion.div
-    initial={{ y: "100%" }}
-    animate={{ y: show ? 0 : "100%" }}
-    transition={{ 
-      duration: 2.5, // Slower duration
-      ease: "easeInOut", // Smooth easing
-      type: "tween" // Remove spring for smoother motion
-    }}
-    className="w-full min-h-screen bg-primary"
-  >
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: show ? 1 : 0 }}
-      transition={{ duration: 1.5, delay: 1.5 }}
-      className="bg-hero-pattern bg-cover bg-no-repeat bg-center"
-    >
-      <Navbar />
-      <Hero />
-    </motion.div>
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: show ? 1 : 0 }}
-      transition={{ duration: 1.5, delay: 2 }}
-    >
-      <About />
-      <Experience />
-      <Tech />
-      <Works />
-      <div className="relative z-0">
-        <Contact />
-        <Footer />
-        <StarsCanvas />
-      </div>
-    </motion.div>
-  </motion.div>
-);
-
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [showLoader, setShowLoader] = useState(true);
-  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    // Longer initial loading time
-    const timer = setTimeout(() => setLoading(false), 3000);
-
+    const timer = setTimeout(() => setLoading(false), 2500);
     let hideTimer;
     if (!loading) {
-      // Slower transition after loading
-      hideTimer = setTimeout(() => {
-        setShowLoader(false);
-        setShowContent(true);
-      }, 1000);
+      hideTimer = setTimeout(() => setShowLoader(false), 700);
     }
-
     return () => {
       clearTimeout(timer);
       clearTimeout(hideTimer);
     };
   }, [loading]);
+
+  if (showLoader) {
+    return <Loader show={loading} />;
+  }
 
   return (
     <BrowserRouter
@@ -134,9 +95,20 @@ const App = () => {
         v7_relativeSplatPath: true,
       }}
     >
-      <div className="relative z-0 overflow-hidden">
-        {showLoader && <Loader show={loading} />}
-        <MainContent show={showContent} />
+      <div className="relative z-0 bg-primary min-h-screen">
+        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+          <Navbar />
+          <Hero />
+        </div>
+        <About />
+        <Experience />
+        <Tech />
+        <Works />
+        <div className="relative z-0">
+          <Contact />
+          <Footer />
+          <StarsCanvas />
+        </div>
       </div>
     </BrowserRouter>
   );
