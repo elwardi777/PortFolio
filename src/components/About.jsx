@@ -41,7 +41,6 @@ const About = () => {
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
 
-Étudiant en BTS Informatique | Polyglotte | Passionné par le piratage éthique, l’IA et les langages de programmation
 
 Actuellement en formation de Brevet de Technicien Supérieur en Informatique, je suis animé par une passion profonde pour les nouvelles technologies, notamment le piratage éthique, l’intelligence artificielle et les langages de programmation. Polyglotte, j’ai développé une grande capacité d’adaptation et une ouverture sur le monde.
 

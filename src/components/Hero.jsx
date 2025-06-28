@@ -83,7 +83,7 @@ const Hero = () => {
                   strings: [
                     "Développement Web",
                     "Cybersécurité",
-                    "Intelligence Artificielle (IA)",
+                    "Intelligence Artificielle ",
                     "Big Data & Analyse des données",
                   ],
                   autoStart: true,

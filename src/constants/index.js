@@ -109,8 +109,8 @@ export const experiences = [
       { name: "Tailwind CSS", color: "pink-text-gradient" },
       { name: "MySQL", color: "green-text-gradient" },
     ],
-    image: "https://example.com/images/gestion-stagiaire.png",
-    source_code_link: "",
+    image: "/Capture d’écran 2025-06-28 195055.png",
+    source_code_link: "https://github.com/elwardi777/GestionStagaire",
   },
 
   {
@@ -122,7 +122,7 @@ export const experiences = [
       { name: "MySQL", color: "green-text-gradient" },
       { name: "Full-stack", color: "pink-text-gradient" },
     ],
-    image: "https://example.com/images/vintedmaghreb.png",
-    source_code_link: "",
+    image: "/Capture d’écran 2025-06-28 195337.png",
+    source_code_link: "https://github.com/elwardi777/Vinted-Maghreb",
   },
 ];

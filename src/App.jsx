@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
+import ContactFab from "./components/ContactFab";
+
 import {
   About,
   Contact,
@@ -108,6 +110,8 @@ const App = () => {
           <Contact />
           <Footer />
           <StarsCanvas />
+          <ContactFab />
+
         </div>
       </div>
     </BrowserRouter>
