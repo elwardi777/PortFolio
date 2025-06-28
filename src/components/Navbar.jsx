@@ -92,7 +92,7 @@
             &times;
           </button>
           <img
-            src="/IMG-20250619-WA0031.jpg"
+            src="/b3ec8224-3dba-4ef6-bc89-31335adc2fdd.jpeg"
             alt="Agrandir"
             className="max-w-[90vw] max-h-[80vh] rounded-2xl shadow-2xl border-4 border-white"
             onClick={(e) => e.stopPropagation()}
@@ -129,10 +129,10 @@
                 ref={imgRef}
                 style={{
                   perspective: 800,
-                  width: 56,
-                  height: 56,
-                  minWidth: 56,
-                  minHeight: 56,
+                  width: 44,
+                  height: 44,
+                  minWidth: 44,
+                  minHeight: 44,
                   marginRight: 8,
                   borderRadius: '50%',
                   boxShadow: '0 6px 24px rgba(145,94,255,0.3)',
@@ -162,7 +162,7 @@
                 }}
               >
                 <img
-                  src="/IMG-20250619-WA0031.jpg"
+                  src="/la_premi_re_lettre_de_mon_pr_nom_a.jpeg"
                   alt="logo"
                   className="w-full h-full object-cover rounded-full"
                   draggable={false}
