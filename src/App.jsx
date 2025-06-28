@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { About, Contact, Experience, Hero, Navbar, StarsCanvas, Tech, Works } from './components';
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -21,10 +22,12 @@ const App = () => {
         <Works />
         <div className="relative z-0">
           <Contact />
+          <Footer />
           <StarsCanvas />
         </div>
       </div>
     </BrowserRouter>
+    
   );
 };
 
