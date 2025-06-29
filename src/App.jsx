@@ -14,7 +14,7 @@ import {
 } from "./components";
 import Footer from "./components/Footer";
 
-// Responsive Loader
+// Responsive Loader with "log-in-the-picture" animated effect
 const Loader = ({ show }) => (
   <div
     className={`fixed inset-0 flex items-center justify-center bg-black z-50 transition-all duration-700 ${
@@ -23,7 +23,11 @@ const Loader = ({ show }) => (
         : "opacity-0 pointer-events-none translate-y-10"
     }`}
   >
-    <span className="loader-text">CHARGEMENT...</span>
+    <div className="relative flex items-center justify-center">
+      <span className="loader-text">CHARGEMENT...</span>
+      {/* Animated glowing log/bar */}
+      <span className="loader-log" />
+    </div>
     <style>{`
       .loader-text {
         color: #915EFF;
@@ -37,19 +41,47 @@ const Loader = ({ show }) => (
         letter-spacing: 0.25em;
         transition: opacity 0.7s, transform 0.7s;
         animation: glow 1.6s ease-in-out infinite alternate;
-        /* Responsive font size */
-        font-size: 2.5rem;
+        position: relative;
+        z-index: 2;
+      }
+      .loader-log {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 0.6em;
+        background: linear-gradient(90deg, rgba(145,94,255,0) 0%, #915EFF 50%, rgba(145,94,255,0) 100%);
+        opacity: 0.55;
+        border-radius: 0.3em;
+        transform: translateY(-50%);
+        pointer-events: none;
+        z-index: 1;
+        animation: sweep 1.2s linear infinite;
+        filter: blur(3px);
+      }
+      @keyframes sweep {
+        0% { left: -60%; width: 40%; opacity: 0.2; }
+        30% { opacity: 0.55; }
+        50% { left: 10%; width: 80%; opacity: 0.9; }
+        70% { opacity: 0.55; }
+        100% { left: 100%; width: 40%; opacity: 0.2; }
       }
       @media (max-width: 640px) {
         .loader-text {
           font-size: 1.4rem;
           letter-spacing: 0.12em;
         }
+        .loader-log {
+          height: 0.35em;
+        }
       }
       @media (max-width: 400px) {
         .loader-text {
           font-size: 1rem;
           letter-spacing: 0.09em;
+        }
+        .loader-log {
+          height: 0.22em;
         }
       }
       @keyframes glow {
@@ -105,14 +137,12 @@ const App = () => {
         <About />
         <Tech />
         <Experience />
-      
         <Works />
         <div className="relative z-0">
           <Contact />
           <Footer />
           <StarsCanvas />
           <ContactFab />
-
         </div>
       </div>
     </BrowserRouter>
