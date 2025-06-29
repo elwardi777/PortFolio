@@ -47,12 +47,16 @@ Actuellement en formation de Brevet de Technicien Supérieur en Informatique, je
 Je souhaite intégrer une entreprise innovante qui valorise la collaboration, la créativité et l’apprentissage continu. Mon enthousiasme et ma motivation sont mes moteurs pour relever les défis technologiques et contribuer activement à des projets à fort impact.
 
       </motion.p>
+{
 
-      <div className="mt-20 flex flex-wrap gap-10">
+
+  /*  <div className="mt-20 flex flex-wrap gap-10">
         {services.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
         ))}
-      </div>
+      </div>*/
+}
+    
     </>
   );
 };
