@@ -73,7 +73,7 @@ const Hero = () => {
         {/* Text Content */}
         <div className="flex-1 w-full text-center md:text-left">
           <h1 className={`${styles.heroHeadText} text-white`}>
-            Salut, je suis <span className="text-[#915EFF]">Abderrahmane</span>
+            Salut, je suis <span className="text-[#915EFF]">ABDERRAHMANE</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
             développeur spécialisé en&nbsp;

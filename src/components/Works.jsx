@@ -53,16 +53,20 @@ const ProjectCard = ({ name, description, tags, image, source_code_link }) => {
 const Works = () => {
   return (
     <>
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} `}>Mon travail</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projets</h2>
-      </motion.div>
-      <div className="w-full flex">
-        <motion.p variants={fadeIn("", "", 0.1)} className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]">
-          Les projets suivants mettent en valeur mes compétences et mon expérience à travers des exemples concrets. 
-          Chaque projet est brièvement décrit avec des liens vers les dépôts de code.
-        </motion.p>
-      </div>
+    <div className="w-full flex flex-col items-center text-center">
+  <motion.div variants={textVariant()}>
+    <p className={`${styles.sectionSubText}`}>Mon travail</p>
+    <h2 className={`${styles.sectionHeadText}`}>Projets</h2>
+  </motion.div>
+  <motion.p
+    variants={fadeIn("", "", 0.1)}
+    className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
+  >
+    Les projets suivants mettent en valeur mes compétences et mon expérience à travers des exemples concrets. 
+    Chaque projet est brièvement décrit avec des liens vers les dépôts de code.
+  </motion.p>
+</div>
+
       <div className="mt-20 flex flex-wrap gap-7">
         {projects.map((project, index) => (
           <ProjectCard key={`project-${index}`} {...project} />

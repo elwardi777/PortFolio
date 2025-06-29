@@ -22,4 +22,4 @@ export { default as eduskill } from "./eduskill.png";
 export { default as typescript } from "./typescript.png";
 export { default as php } from "./php.png";
 export { default as dotnet } from "./dotnet.png";
-export { default as express } from "./express.png";
+export { default as express } from "./expressjs.png";

@@ -26,6 +26,12 @@ import nodejs from "./tech/nodejs.png";
 import reactjs from "./tech/reactjs.png";
 import tailwind from "./tech/tailwind.png";
 import threejs from "./tech/threejs.png";
+import php from "./tech/php.png";
+import typescript from "./tech/typescript.png";
+import dotnet from "./tech/dotnet.png";
+import sql from "./tech/sql.png";
+import expressjs from "./tech/expressjs.jpg";
+import mysql from "./tech/mysql.png";
 
 // Import common assets
 import logo from "./logo.svg";
@@ -59,4 +65,10 @@ export {
   menu,
   close,
   eduskill,
+  typescript,
+  php,
+  dotnet,
+  sql,
+  expressjs,
+  mysql,
 };
